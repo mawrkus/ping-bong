@@ -9,7 +9,7 @@ $ npm install -g bong
 $ bong http://whatismyipaddress.com
 ```
 
-## 🎯 Demos
+## 🎯 Demo
 
 Clone the project...
 
