@@ -8,6 +8,7 @@ A simple ping tool that follows HTTP redirections.
 $ npm install -g bong
 
 $ bong http://whatismyipaddress.com
+
 {
   "url": "http://www.softonic.com/ie/12345",
   "redirections": [
