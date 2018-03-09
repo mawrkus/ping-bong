@@ -32,7 +32,8 @@ $ bong http://www.softonic.com/ie/12345
 ```
 
 ```shell
-$ node index.js http://www.softonic.com/ie/12345/xxx                        {
+$ node index.js http://www.softonic.com/ie/12345/xxx                       
+{
   "url": "http://www.softonic.com/ie/12345/xxx",
   "redirections": [
     {
