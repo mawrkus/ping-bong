@@ -6,7 +6,25 @@ A simple ping tool that follows HTTP redirections.
 
 ```shell
 $ npm install -g bong
+
 $ bong http://whatismyipaddress.com
+{
+  "url": "http://www.softonic.com/ie/12345",
+  "redirections": [
+    {
+      "statusCode": 301,
+      "to": "https://www.softonic.com/ie/12345"
+    },
+    {
+      "statusCode": 301,
+      "to": "https://pingtool.softonic.com"
+    },
+    {
+      "statusCode": 200,
+      "url": "https://pingtool.softonic.com"
+    }
+  ]
+}
 ```
 
 ## 🎯 Demo
