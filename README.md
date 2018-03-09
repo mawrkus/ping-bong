@@ -7,7 +7,7 @@ A simple ping tool that follows HTTP redirections.
 ```shell
 $ npm install -g bong
 
-$ bong http://whatismyipaddress.com
+$ bong http://www.softonic.com/ie/12345
 
 {
   "url": "http://www.softonic.com/ie/12345",
