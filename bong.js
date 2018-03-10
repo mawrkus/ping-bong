@@ -3,7 +3,7 @@
 const axios = require('axios');
 const debug = require('debug')('ping');
 
-async function ping({ url, redirections = [] } = {}) {
+module.exports = async function bong({ url, redirections = [] } = {}) {
   try {
     const { status: statusCode, statusText } = await axios.request({
       method: 'head',
@@ -25,7 +25,7 @@ async function ping({ url, redirections = [] } = {}) {
     if (statusCode >= 300 && statusCode < 400) {
       redirections.push({ statusCode, to });
       debug('Following "%s"...', to);
-      return ping({ url: to, redirections });
+      return bong({ url: to, redirections });
     }
 
     redirections.push({ error: { statusCode, statusText }, url });
@@ -33,9 +33,3 @@ async function ping({ url, redirections = [] } = {}) {
     return redirections;
   }
 }
-
-(async () => {
-  const url = process.argv[2];
-  const redirections = await ping({ url });
-  console.log(JSON.stringify({ url, redirections }, null, 2));
-})();
