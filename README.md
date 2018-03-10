@@ -10,6 +10,8 @@ $ npm install -g bong
 
 ## 🎯 Usage
 
+## CLI
+
 ```shell
 $ bong http://www.softonic.com/ie/12345
 {
@@ -32,7 +34,7 @@ $ bong http://www.softonic.com/ie/12345
 ```
 
 ```shell
-$ node index.js http://www.softonic.com/ie/12345/xxx                       
+$ bong http://www.softonic.com/ie/12345/xxx                       
 {
   "url": "http://www.softonic.com/ie/12345/xxx",
   "redirections": [
@@ -49,6 +51,17 @@ $ node index.js http://www.softonic.com/ie/12345/xxx
     }
   ]
 }
+```
+
+## API
+
+```javascript
+const bong = require('bong');
+
+(async () => {
+  const redirections = await bong({ url });
+  console.log(JSON.stringify({ url, redirections }, null, 2));
+})();
 ```
 
 ## 🎯 Demo
