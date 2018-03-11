@@ -13,7 +13,7 @@ module.exports = async function bong({ url, redirections = [] } = {}) {
 
     debug('HEAD %s: %s (%d)', url, statusText, statusCode);
 
-    redirections.push({ statusCode, url });
+    redirections.push({ url, statusCode });
 
     return redirections;
   } catch (error) {
@@ -24,7 +24,7 @@ module.exports = async function bong({ url, redirections = [] } = {}) {
     if (statusCode >= 300 && statusCode < 400) {
       const { location: to } = headers;
 
-      redirections.push({ statusCode, to });
+      redirections.push({ to, statusCode });
 
       debug('Following "%s"...', to);
 
