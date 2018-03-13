@@ -7,7 +7,10 @@
   "author": "mawrkus <web@sparring-partner.be>",
   "license": "MIT",
   "scripts": {
-    "demo": "DEBUG=ping node index.js http://www.softonic.com/ie/12345"
+    "demo": "DEBUG=ping node index.js http://www.softonic.com/ie/12345",
+    "release": "npm version -m \"New version: %s\"",
+    "postrelease": "npm run push && npm publish",
+    "push": "git push origin master && git push origin --tags"
   },
   "dependencies": {
     "axios": "^0.18.0",

@@ -1,15 +1,23 @@
 #!/usr/bin/env node
 
 const axios = require('axios');
-const debug = require('debug')('ping');
+const debug = require('debug')('bong');
+const { name, version } = require('./package.json');
 
-module.exports = async function bong({ url, redirections = [] } = {}) {
+const bongAgent = `${name} v${version}`
+
+module.exports = async function bong({ url, userAgent = bongAgent, redirections = [] } = {}) {
   try {
-    const { status: statusCode, statusText } = await axios.request({
+    const requestOptions = {
       method: 'head',
       url,
       maxRedirects: 0,
-    });
+      headers: {
+        'User-Agent': userAgent,
+      }
+    };
+
+    const { status: statusCode, statusText } = await axios.request(requestOptions);
 
     debug('HEAD %s: %s (%d)', url, statusText, statusCode);
 
@@ -28,7 +36,7 @@ module.exports = async function bong({ url, redirections = [] } = {}) {
 
       debug('Following "%s"...', to);
 
-      return bong({ url: to, redirections });
+      return bong({ url: to, userAgent, redirections });
     }
 
     redirections.push({ error: { statusCode, statusText }, url });
