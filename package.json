@@ -1,13 +1,13 @@
 {
-  "name": "bong",
+  "name": "ping-bong",
   "version": "1.0.0",
   "description": "A simple ping tool that follows HTTP redirections",
-  "main": "bong.js",
-  "bin": "bin/bong.js",
+  "main": "ping-bong.js",
+  "bin": "bin/ping-bong.js",
   "author": "mawrkus <web@sparring-partner.be>",
   "license": "MIT",
   "scripts": {
-    "demo": "DEBUG=ping node index.js http://www.softonic.com/ie/12345",
+    "demo": "DEBUG=ping-bong node bin/ping-bong.js http://www.softonic.com/ie/12345",
     "release": "npm version -m \"New version: %s\"",
     "postrelease": "npm run push && npm publish",
     "push": "git push origin master && git push origin --tags"

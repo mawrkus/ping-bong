@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
 const axios = require('axios');
-const debug = require('debug')('bong');
+const debug = require('debug')('ping-bong');
 const { name, version } = require('./package.json');
 
 const bongAgent = `${name} v${version}`
 
-module.exports = async function bong({ url, userAgent = bongAgent, redirections = [] } = {}) {
+module.exports = async function pingBong({ url, userAgent = bongAgent, redirections = [] } = {}) {
   try {
     const requestOptions = {
       method: 'head',
@@ -36,7 +36,7 @@ module.exports = async function bong({ url, userAgent = bongAgent, redirections 
 
       debug('Following "%s"...', to);
 
-      return bong({ url: to, userAgent, redirections });
+      return pingBong({ url: to, userAgent, redirections });
     }
 
     redirections.push({ error: { statusCode, statusText }, url });
