@@ -9,6 +9,10 @@ if (!url) {
 }
 
 (async () => {
-  const redirections = await pingBong({ url });
-  console.log(JSON.stringify({ url, redirections }, null, 2));
+  try {
+    const redirections = await pingBong({ url });
+    console.log(JSON.stringify({ url, redirections }, null, 2));
+  } catch(error) {
+    console.log(error);
+  }
 })();

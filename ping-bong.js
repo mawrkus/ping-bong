@@ -25,7 +25,7 @@ module.exports = async function pingBong({ url, userAgent = bongAgent, redirecti
 
     return redirections;
   } catch (error) {
-    const { status: statusCode, statusText, headers } = error.response;
+    const { status: statusCode, statusText, headers } = error.response || {};
 
     debug('HEAD %s: %s (%d)', url, statusText, statusCode);
 
@@ -39,7 +39,7 @@ module.exports = async function pingBong({ url, userAgent = bongAgent, redirecti
       return pingBong({ url: to, userAgent, redirections });
     }
 
-    redirections.push({ error: { statusCode, statusText }, url });
+    redirections.push({ error: { statusCode, statusText, msg: error.message }, url });
 
     return redirections;
   }
