@@ -5,7 +5,8 @@ const pingBong = require('..');
 
 const url = process.argv[2];
 if (!url) {
-  throw new Error('Please provide a URL, thanks!');
+  console.error('Please provide a URL!');
+  process.exit(1);
 }
 
 (async () => {
