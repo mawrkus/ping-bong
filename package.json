@@ -2,11 +2,12 @@
   "name": "ping-bong",
   "version": "1.2.0",
   "description": "A simple ping tool that follows HTTP redirections",
-  "main": "ping-bong.js",
+  "main": "es/ping-bong.js",
   "bin": "bin/ping-bong.js",
   "author": "mawrkus <web@sparring-partner.be>",
   "license": "MIT",
   "scripts": {
+    "lint": "eslint es/ bin/",
     "demo": "DEBUG=ping-bong node bin/ping-bong.js http://www.softonic.com/ie/12345",
     "release": "npm version -m \"New version: %s\"",
     "postrelease": "npm run push && npm publish",
@@ -15,5 +16,11 @@
   "dependencies": {
     "axios": "^0.18.0",
     "debug": "^3.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jest": "^21.15.1"
   }
 }
