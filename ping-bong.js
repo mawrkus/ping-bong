@@ -6,10 +6,15 @@ const { name, version } = require('./package.json');
 
 const bongAgent = `${name} v${version}`
 
-module.exports = async function pingBong({ url, userAgent = bongAgent, redirections = [] } = {}) {
+module.exports = async function pingBong({
+  method = 'head',
+  url,
+  userAgent = bongAgent,
+  redirections = [],
+} = {}) {
   try {
     const requestOptions = {
-      method: 'head',
+      method,
       url,
       maxRedirects: 0,
       headers: {
