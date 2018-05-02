@@ -2,7 +2,7 @@
 
 /* eslint-disable no-console */
 
-const pingBong = require('..');
+const PingBong = require('..');
 
 const url = process.argv[2];
 if (!url) {
@@ -10,12 +10,11 @@ if (!url) {
   process.exit(1);
 }
 
-const method = process.argv[3];
-
 (async () => {
   try {
-    const redirections = await pingBong({ method, url });
-    console.log(JSON.stringify({ url, redirections }, null, 2));
+    const pingyBong = new PingBong();
+    const redirections = await pingyBong.check({ url });
+    console.log(JSON.stringify(redirections, null, 2));
   } catch (error) {
     console.log(error);
   }

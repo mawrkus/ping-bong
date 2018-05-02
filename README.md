@@ -14,53 +14,64 @@ $ npm install -g ping-bong
 
 ```shell
 $ ping-bong http://www.softonic.com/ie/12345
-{
-  "url": "http://www.softonic.com/ie/12345",
-  "redirections": [
-    {
-      "statusCode": 301,
-      "to": "https://www.softonic.com/ie/12345"
-    },
-    {
-      "statusCode": 301,
-      "to": "https://pingtool.softonic.com"
-    },
-    {
-      "statusCode": 200,
-      "url": "https://pingtool.softonic.com"
-    }
-  ]
-}
-```
-
-```shell
-$ ping-bong http://www.softonic.com/ie/12345/xxx                       
-{
-  "url": "http://www.softonic.com/ie/12345/xxx",
-  "redirections": [
-    {
-      "statusCode": 301,
-      "to": "https://www.softonic.com/ie/12345/xxx"
-    },
-    {
-      "error": {
-        "statusCode": 404,
-        "statusText": "Not Found"
-      },
-      "url": "https://www.softonic.com/ie/12345/xxx"
-    }
-  ]
-}
+[
+  {
+    "method": "head",
+    "url": "http://www.softonic.com/ie/12345",
+    "status": 301,
+    "statusText": "Moved Permanently",
+    "data": "",
+    "to": "https://www.softonic.com/ie/12345"
+  },
+  {
+    "method": "head",
+    "url": "https://www.softonic.com/ie/12345",
+    "status": 301,
+    "statusText": "Moved Permanently",
+    "data": "",
+    "to": "https://pingtool.softonic.com"
+  },
+  {
+    "method": "head",
+    "url": "https://pingtool.softonic.com",
+    "status": 200,
+    "statusText": "OK",
+    "data": ""
+  }
+]
 ```
 
 ## API
 
 ```javascript
-const pingBong = require('ping-bong');
+const PingBong = require('ping-bong');
 
 (async () => {
-  const redirections = await pingBong({ url });
-  console.log(JSON.stringify({ url, redirections }, null, 2));
+  const pingyBong = new PingBong({
+    httpOptions = {
+      method: 'get',
+      headers: {
+        'User-Agent': 'pingee-beengee/42.0',
+      },
+    },
+    includes = {
+      request: {
+        method: false,
+        url: true,
+        headers: false,
+      },
+      response: {
+        status: true,
+        statusText: false,
+        headers: true,
+        data: true,
+      },
+    },
+  });
+
+  const redirections = await pingyBong.check({ url });
+
+  console.log(JSON.stringify(redirections, null, 2));
 })();
 ```
 
