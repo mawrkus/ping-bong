@@ -16,27 +16,24 @@ $ npm install -g ping-bong
 $ ping-bong http://www.softonic.com/ie/12345
 [
   {
-    "method": "head",
     "url": "http://www.softonic.com/ie/12345",
+    "method": "head",
     "status": 301,
     "statusText": "Moved Permanently",
-    "data": "",
     "to": "https://www.softonic.com/ie/12345"
   },
   {
-    "method": "head",
     "url": "https://www.softonic.com/ie/12345",
+    "method": "head",
     "status": 301,
     "statusText": "Moved Permanently",
-    "data": "",
     "to": "https://pingtool.softonic.com"
   },
   {
     "method": "head",
     "url": "https://pingtool.softonic.com",
     "status": 200,
-    "statusText": "OK",
-    "data": ""
+    "statusText": "OK"
   }
 ]
 ```
