@@ -4,6 +4,9 @@
   "description": "A simple ping tool that follows HTTP redirections",
   "main": "es/ping-bong.js",
   "bin": "bin/ping-bong.js",
+  "engines": {
+    "node": ">= 8.9"
+  },
   "author": "mawrkus <web@sparring-partner.be>",
   "license": "MIT",
   "scripts": {

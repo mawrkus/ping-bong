@@ -1,5 +1,8 @@
 # Ping Bong
 
+[![npm](https://img.shields.io/npm/l/ping-bong.svg)](https://www.npmjs.org/package/ping-bong) [![npm](https://img.shields.io/npm/v/ping-bong.svg)](https://www.npmjs.org/package/ping-bong)
+![Node version](https://img.shields.io/node/v/ping-bong.svg?style=flat-square)
+
 A simple ping tool that follows HTTP redirections.
 
 ## 🏓 Installation
