@@ -9,6 +9,14 @@
   },
   "author": "mawrkus <web@sparring-partner.be>",
   "license": "MIT",
+  "homepage": "https://github.com/mawrkus/ping-bong",
+  "bugs": {
+    "url": "https://github.com/mawrkus/ping-bong/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mawrkus/ping-bong.git"
+  },
   "scripts": {
     "lint": "eslint es/ bin/",
     "demo": "DEBUG=ping-bong node bin/ping-bong.js http://www.softonic.com/ie/12345",
