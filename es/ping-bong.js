@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 const axios = require('axios');
+const get = require('lodash.get');
+const set = require('lodash.set');
 const debug = require('debug')('ping-bong');
 const { name: pkgName, version: pkgVersion } = require('../package.json');
 
@@ -71,37 +73,31 @@ module.exports = class PingBong {
    * @param {Object} [httpOptions.headers]
    * @param {string} [httpOptions.headers.User-Agent]
    * @param {Object} [includes]
-   * @param {Object} [includes.request]
-   * @param {Object} [includes.response]
    */
   constructor({
     httpOptions = {
       method: 'head',
       headers: {
-        'User-Agent': `${pkgName}/${pkgVersion}`,
+        'user-agent': `${pkgName}/${pkgVersion}`,
       },
     },
     includes = {
-      request: {
-        method: true,
-        url: true,
-        headers: false,
-      },
-      response: {
-        status: true,
-        statusText: true,
-        headers: false,
-        data: false,
-      },
+      'request.method': 'method',
+      'request.url': 'url',
+      'response.headers.location': 'to',
+      'response.status': 'statusCode',
+      'response.statusText': 'statusText',
+      'request.headers.user-agent': 'userAgent',
     },
   } = {}) {
     debug('🏓  %s v%s', pkgName, pkgVersion);
-    debug('HTTP options', httpOptions);
-    debug('Includes', includes);
 
     this._httpClient = createHttpClient(httpOptions);
-    this._httpOptions = httpOptions;
-    this._includes = includes;
+    this._httpOptions = { ...httpOptions };
+    this._includes = { ...includes };
+
+    debug('HTTP options', this._httpOptions);
+    debug('Includes', this._includes);
   }
 
   /**
@@ -125,17 +121,12 @@ module.exports = class PingBong {
       } catch (error) {
         const { response = {} } = error;
 
-        const redirection = {
-          // just in case an error occurs before having a response
-          url: currentUrl,
-          ...this._grabRedirection({ response }),
-        };
+        const redirection = this._grabRedirection({ response });
 
         if (isRedirection(response)) {
-          const { location: to } = response.headers;
-          redirection.to = to;
-          currentUrl = to;
+          currentUrl = response.headers.location;
         } else {
+          redirection.url = currentUrl;
           redirection.error = error.message;
           currentUrl = null;
         }
@@ -153,19 +144,17 @@ module.exports = class PingBong {
    * @return {Object}
    */
   _grabRedirection({ response }) {
-    const { config: request = {} } = response;
+    const syntheticResponse = {
+      request: response.config,
+      response,
+    };
     const redirection = {};
 
-    Object.keys(this._includes.request)
-      .filter(key => this._includes.request[key] && request[key])
-      .forEach((key) => {
-        redirection[key] = request[key];
-      });
-
-    Object.keys(this._includes.response)
-      .filter(key => this._includes.response[key] && response[key])
-      .forEach((key) => {
-        redirection[key] = response[key];
+    Object.keys(this._includes)
+      .forEach((from) => {
+        const value = get(syntheticResponse, from);
+        const to = this._includes[from];
+        set(redirection, to, value);
       });
 
     return redirection;

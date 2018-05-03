@@ -16,26 +16,30 @@ $ npm install -g ping-bong
 $ ping-bong http://www.softonic.com/ie/12345
 [
   {
-    "url": "http://www.softonic.com/ie/12345",
     "method": "head",
-    "status": 301,
+    "url": "http://www.softonic.com/ie/12345",
+    "to": "https://www.softonic.com/ie/12345",
+    "statusCode": 301,
     "statusText": "Moved Permanently",
-    "to": "https://www.softonic.com/ie/12345"
+    "userAgent": "ping-bong/3.0.0"
   },
   {
-    "url": "https://www.softonic.com/ie/12345",
     "method": "head",
-    "status": 301,
+    "url": "https://www.softonic.com/ie/12345",
+    "to": "https://pingtool.softonic.com",
+    "statusCode": 301,
     "statusText": "Moved Permanently",
-    "to": "https://pingtool.softonic.com"
+    "userAgent": "ping-bong/3.0.0"
   },
   {
     "method": "head",
     "url": "https://pingtool.softonic.com",
-    "status": 200,
-    "statusText": "OK"
+    "statusCode": 200,
+    "statusText": "OK",
+    "userAgent": "ping-bong/3.0.0"
   }
 ]
+
 ```
 
 ## API
@@ -52,17 +56,12 @@ const PingBong = require('ping-bong');
       },
     },
     includes = {
-      request: {
-        method: false,
-        url: true,
-        headers: false,
-      },
-      response: {
-        status: true,
-        statusText: false,
-        headers: true,
-        data: true,
-      },
+      'request.method': 'method',
+      'request.url': 'url',
+      'response.headers.location': 'to',
+      'response.status': 'statusCode',
+      'response.statusText': 'statusText',
+      'request.headers.user-agent': 'userAgent',
     },
   });
 
