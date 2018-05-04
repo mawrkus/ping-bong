@@ -119,7 +119,7 @@ module.exports = class PingBong {
 
         currentUrl = null;
       } catch (error) {
-        const { response = {} } = error;
+        const { response = { statusText: 'error' } } = error;
 
         const redirection = this._grabRedirection({ response });
 
