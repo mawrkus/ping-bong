@@ -87,6 +87,7 @@ module.exports = class PingBong {
       'response.headers.location': 'to',
       'response.status': 'statusCode',
       'response.statusText': 'statusText',
+      'response.responseTime': 'responseTime',
       'request.headers.user-agent': 'userAgent',
     },
   } = {}) {
@@ -108,10 +109,14 @@ module.exports = class PingBong {
     const redirections = [];
     let currentUrl = url;
 
+    /* eslint-disable no-await-in-loop */
     do {
-      /* eslint-disable no-await-in-loop */
+      const start = Date.now();
+
       try {
         const response = await this._httpClient.request({ url: currentUrl });
+
+        response.responseTime = Date.now() - start;
 
         const finalRedirection = this._grabRedirection({ response });
 
@@ -120,6 +125,8 @@ module.exports = class PingBong {
         currentUrl = null;
       } catch (error) {
         const { response = { statusText: 'error' } } = error;
+
+        response.responseTime = Date.now() - start;
 
         const redirection = this._grabRedirection({ response });
 
@@ -133,8 +140,8 @@ module.exports = class PingBong {
 
         redirections.push(redirection);
       }
-      /* eslint-enable no-await-in-loop */
     } while (currentUrl);
+    /* eslint-enable no-await-in-loop */
 
     return redirections;
   }

@@ -24,7 +24,8 @@ $ ping-bong http://www.softonic.com/ie/12345
     "to": "https://www.softonic.com/ie/12345",
     "statusCode": 301,
     "statusText": "Moved Permanently",
-    "userAgent": "ping-bong/3.0.0"
+    "responseTime": 126,
+    "userAgent": "ping-bong/3.0.3"
   },
   {
     "method": "head",
@@ -32,14 +33,16 @@ $ ping-bong http://www.softonic.com/ie/12345
     "to": "https://pingtool.softonic.com",
     "statusCode": 301,
     "statusText": "Moved Permanently",
-    "userAgent": "ping-bong/3.0.0"
+    "responseTime": 313,
+    "userAgent": "ping-bong/3.0.3"
   },
   {
     "method": "head",
     "url": "https://pingtool.softonic.com",
     "statusCode": 200,
     "statusText": "OK",
-    "userAgent": "ping-bong/3.0.0"
+    "responseTime": 300,
+    "userAgent": "ping-bong/3.0.3"
   }
 ]
 
@@ -64,6 +67,7 @@ const PingBong = require('ping-bong');
       'response.headers.location': 'to',
       'response.status': 'statusCode',
       'response.statusText': 'statusText',
+      'response.responseTime': 'responseTime',
       'request.headers.user-agent': 'userAgent',
     },
   });
