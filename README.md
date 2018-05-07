@@ -25,7 +25,7 @@ $ ping-bong http://www.softonic.com/ie/12345
     "statusCode": 301,
     "statusText": "Moved Permanently",
     "responseTime": 126,
-    "userAgent": "ping-bong/3.0.3"
+    "userAgent": "ping-bong/3.0.4"
   },
   {
     "method": "head",
@@ -34,7 +34,7 @@ $ ping-bong http://www.softonic.com/ie/12345
     "statusCode": 301,
     "statusText": "Moved Permanently",
     "responseTime": 313,
-    "userAgent": "ping-bong/3.0.3"
+    "userAgent": "ping-bong/3.0.4"
   },
   {
     "method": "head",
@@ -42,7 +42,7 @@ $ ping-bong http://www.softonic.com/ie/12345
     "statusCode": 200,
     "statusText": "OK",
     "responseTime": 300,
-    "userAgent": "ping-bong/3.0.3"
+    "userAgent": "ping-bong/3.0.4"
   }
 ]
 
@@ -60,6 +60,7 @@ const PingBong = require('ping-bong');
       headers: {
         'User-Agent': 'pingee-beengee/42.0',
       },
+      maxRedirects: 10,
     },
     includes = {
       'request.method': 'method',

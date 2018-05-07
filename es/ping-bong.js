@@ -39,7 +39,7 @@ function logRequest({ method, url/* , headers */ }) {
 function createHttpClient(httpOptions) {
   const httpClient = axios.create({
     ...httpOptions,
-    maxRedirects: 0,
+    maxRedirects: 0, // no follow
   });
 
   httpClient.interceptors.request.use((config) => {
@@ -80,6 +80,7 @@ module.exports = class PingBong {
       headers: {
         'user-agent': `${pkgName}/${pkgVersion}`,
       },
+      maxRedirects: 10,
     },
     includes = {
       'request.method': 'method',
@@ -93,11 +94,18 @@ module.exports = class PingBong {
   } = {}) {
     debug('🏓  %s v%s', pkgName, pkgVersion);
 
-    this._httpClient = createHttpClient(httpOptions);
+    const { maxRedirects } = httpOptions;
+    this._maxRedirects = Number(maxRedirects) >= 0 ? Number(maxRedirects) : 10;
+
     this._httpOptions = { ...httpOptions };
+    delete this._httpOptions.maxRedirects;
+
+    this._httpClient = createHttpClient(httpOptions);
+
     this._includes = { ...includes };
 
     debug('HTTP options', this._httpOptions);
+    debug('Max redirects =', this._maxRedirects);
     debug('Includes', this._includes);
   }
 
@@ -108,6 +116,7 @@ module.exports = class PingBong {
   async check({ url }) {
     const redirections = [];
     let currentUrl = url;
+    let remainingRedirects = this._maxRedirects;
 
     /* eslint-disable no-await-in-loop */
     do {
@@ -131,6 +140,8 @@ module.exports = class PingBong {
         const redirection = this._grabRedirection({ response });
 
         if (isRedirection(response)) {
+          debug('Max %d redirect(s) to follow.', remainingRedirects);
+          remainingRedirects -= 1;
           currentUrl = response.headers.location;
         } else {
           redirection.url = currentUrl;
@@ -140,7 +151,7 @@ module.exports = class PingBong {
 
         redirections.push(redirection);
       }
-    } while (currentUrl);
+    } while (currentUrl && remainingRedirects >= 0);
     /* eslint-enable no-await-in-loop */
 
     return redirections;
