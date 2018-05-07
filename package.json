@@ -1,6 +1,6 @@
 {
   "name": "ping-bong",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "A simple ping tool that follows HTTP redirections",
   "main": "es/ping-bong.js",
   "bin": "bin/ping-bong.js",
