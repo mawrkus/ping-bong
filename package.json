@@ -17,6 +17,15 @@
     "type": "git",
     "url": "git://github.com/mawrkus/ping-bong.git"
   },
+  "keywords": [
+    "http",
+    "htts",
+    "request",
+    "redirect",
+    "follow",
+    "utility",
+    "axios"
+  ],
   "scripts": {
     "lint": "eslint es/ bin/",
     "demo": "DEBUG=ping-bong node bin/ping-bong.js http://www.softonic.com/ie/12345",
