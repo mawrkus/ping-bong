@@ -168,10 +168,9 @@ module.exports = class PingBong {
     };
     const redirection = {};
 
-    Object.keys(this._includes)
-      .forEach((from) => {
+    Object.entries(this._includes)
+      .forEach(([from, to]) => {
         const value = get(syntheticResponse, from);
-        const to = this._includes[from];
         set(redirection, to, value);
       });
 
