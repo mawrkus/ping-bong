@@ -55,14 +55,14 @@ const PingBong = require('ping-bong');
 
 (async () => {
   const pingyBong = new PingBong({
-    httpOptions = {
+    httpOptions: {
       method: 'get',
       headers: {
         'User-Agent': 'pingee-beengee/42.0',
       },
       maxRedirects: 10,
     },
-    includes = {
+    includes: {
       'request.method': 'method',
       'request.url': 'url',
       'response.headers.location': 'to',
