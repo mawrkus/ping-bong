@@ -4,8 +4,17 @@
   "description": "A simple ping tool that follows HTTP redirections",
   "main": "es/ping-bong.js",
   "bin": "bin/ping-bong.js",
-  "engines": {
-    "node": ">= 10"
+  "files": [
+    "./bin",
+    "./es",
+    "README.md"
+  ],
+  "scripts": {
+    "lint": "eslint es/ bin/",
+    "demo": "DEBUG=ping-bong node bin/ping-bong.js http://www.softonic.com/ie/12345",
+    "release": "npm version -m \"New version: %s\"",
+    "postrelease": "npm run push && npm publish",
+    "push": "git push origin master && git push origin --tags"
   },
   "author": "mawrkus <web@sparring-partner.be>",
   "license": "MIT",
@@ -26,12 +35,8 @@
     "utility",
     "axios"
   ],
-  "scripts": {
-    "lint": "eslint es/ bin/",
-    "demo": "DEBUG=ping-bong node bin/ping-bong.js http://www.softonic.com/ie/12345",
-    "release": "npm version -m \"New version: %s\"",
-    "postrelease": "npm run push && npm publish",
-    "push": "git push origin master && git push origin --tags"
+  "engines": {
+    "node": ">= 10"
   },
   "dependencies": {
     "axios": "^0.19.0",
