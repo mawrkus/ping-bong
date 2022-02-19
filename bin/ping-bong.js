@@ -4,7 +4,8 @@
 
 const PingBong = require('..');
 
-const url = process.argv[2];
+const [, , url, method = 'head'] = process.argv;
+
 if (!url) {
   console.error('Please provide a URL!');
   process.exit(1);
@@ -12,7 +13,7 @@ if (!url) {
 
 (async () => {
   try {
-    const pingyBong = new PingBong();
+    const pingyBong = new PingBong({ httpOptions: { method } });
     const redirections = await pingyBong.check({ url });
     console.log(JSON.stringify(redirections, null, 2));
   } catch (error) {

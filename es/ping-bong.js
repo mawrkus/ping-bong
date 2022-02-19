@@ -92,7 +92,7 @@ module.exports = class PingBong {
       'request.headers.user-agent': 'userAgent',
     },
   } = {}) {
-    debug('🏓  %s v%s', pkgName, pkgVersion);
+    debug('🏓 %s v%s', pkgName, pkgVersion);
 
     const { maxRedirects } = httpOptions;
     this._maxRedirects = Number(maxRedirects) >= 0 ? Number(maxRedirects) : 10;

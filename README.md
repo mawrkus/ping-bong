@@ -3,12 +3,18 @@
 [![npm](https://img.shields.io/npm/l/ping-bong.svg)](https://www.npmjs.org/package/ping-bong) [![npm](https://img.shields.io/npm/v/ping-bong.svg)](https://www.npmjs.org/package/ping-bong)
 ![Node version](https://img.shields.io/node/v/ping-bong.svg?style=flat-square)
 
-A simple (SEO) ping tool that follows HTTP redirections.
+A simple SEO ping tool that follows HTTP redirections.
 
 ## 🏓 Installation
 
 ```shell
-$ npm install -g ping-bong
+npm install -g ping-bong
+```
+
+Or using it directly with [npx](https://docs.npmjs.com/cli/v7/commands/npx):
+
+```shell
+npx ping-bong http://gizmodo.com
 ```
 
 ## 🏓 Usage
@@ -16,36 +22,35 @@ $ npm install -g ping-bong
 ## CLI
 
 ```shell
-$ ping-bong http://www.softonic.com/ie/12345
+npx ping-bong http://gizmodo.com
 [
   {
     "method": "head",
-    "url": "http://www.softonic.com/ie/12345",
-    "to": "https://www.softonic.com/ie/12345",
+    "url": "http://gizmodo.com",
+    "to": "https://gizmodo.com/",
     "statusCode": 301,
     "statusText": "Moved Permanently",
-    "responseTime": 126,
-    "userAgent": "ping-bong/3.0.5"
+    "responseTime": 71,
+    "userAgent": "ping-bong/3.0.8"
   },
   {
     "method": "head",
-    "url": "https://www.softonic.com/ie/12345",
-    "to": "https://pingtool.softonic.com",
-    "statusCode": 301,
-    "statusText": "Moved Permanently",
-    "responseTime": 313,
-    "userAgent": "ping-bong/3.0.5"
+    "url": "https://gizmodo.com/",
+    "to": "https://es.gizmodo.com/",
+    "statusCode": 302,
+    "statusText": "https://es.gizmodo.com/",
+    "responseTime": 68,
+    "userAgent": "ping-bong/3.0.8"
   },
   {
     "method": "head",
-    "url": "https://pingtool.softonic.com",
+    "url": "https://es.gizmodo.com/",
     "statusCode": 200,
     "statusText": "OK",
-    "responseTime": 300,
-    "userAgent": "ping-bong/3.0.5"
+    "responseTime": 82,
+    "userAgent": "ping-bong/3.0.8"
   }
 ]
-
 ```
 
 ## API
@@ -73,7 +78,9 @@ const PingBong = require('ping-bong');
     },
   });
 
-  const redirections = await pingyBong.check({ url });
+  const redirections = await pingyBong.check({
+    url: 'http://gizmodo.com',
+  });
 
   console.log(JSON.stringify(redirections, null, 2));
 })();
@@ -81,11 +88,9 @@ const PingBong = require('ping-bong');
 
 ## 🏓 Demo
 
-Clone the project...
-
 ```shell
 $ git clone https://github.com/mawrkus/ping-bong.git
-$ cd bong
+$ cd ping-bong
 $ npm install
 $ npm run demo
 ```

@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "lint": "eslint es/ bin/",
-    "demo": "DEBUG=ping-bong node bin/ping-bong.js http://www.softonic.com/ie/12345",
+    "demo": "DEBUG=ping-bong node bin/ping-bong.js http://gizmodo.com",
     "release": "npm version -m \"New version: %s\"",
     "postrelease": "npm run push && npm publish",
     "push": "git push origin master && git push origin --tags"
@@ -45,8 +45,8 @@
     "lodash.set": "^4.3.2"
   },
   "devDependencies": {
-    "eslint": "^6.3.0",
-    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint": "^8.9.0",
+    "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.18.2"
   }
 }
