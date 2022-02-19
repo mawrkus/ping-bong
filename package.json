@@ -28,11 +28,12 @@
   },
   "keywords": [
     "http",
-    "htts",
+    "https",
     "request",
     "redirect",
     "follow",
-    "utility",
+    "http-redirect",
+    "seo",
     "axios"
   ],
   "engines": {
