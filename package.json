@@ -31,6 +31,8 @@
     "https",
     "request",
     "redirect",
+    "redirects",
+    "redirections",
     "follow",
     "http-redirect",
     "seo",
